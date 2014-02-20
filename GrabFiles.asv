@@ -1,0 +1,40 @@
+clear all
+close all
+
+TrainCleanList = dir('2014\Train\Clean\*.08');
+
+for i=1:numel(TrainCleanList)
+  TrainClean.name = TrainCleanList(i).name;
+   TrainClean.data = FileReader(strcat('2014\Train\Clean\',TrainCleanList(i).name)); 
+end
+
+Train10dBList = dir('2014\Train\10dB\*.08');
+for i=1:numel(Train10dBList)
+  Train10dB.name = Train10dBList(i).name;
+  Train10dB.data = FileReader(strcat('2014\Train\10dB\',Train10dBList(i).name)); 
+end
+
+Train0dBList = dir('2014\Train\0dB\*.08');
+for i=1:numel(TrainCleanList)
+  Train0dB.name = Train0dBList(i).name;
+   Train0dB.data = FileReader(strcat('2014\Train\0dB\',Train0dBList(i).name)); 
+end
+
+EvalCleanList = dir('2014\Eval\Clean\*.08');
+for i=1:numel(EvalCleanList)
+  EvalClean.name = EvalCleanList(i).name;
+   EvalClean.data = FileReader(strcat('2014\Eval\Clean\',EvalCleanList(i).name)); 
+end
+
+Eval10dBList =  dir('2014\Eval\10dB\*.08');
+for i=1:numel(Eval10dBList)
+  Eval10dB.name = Eval10dBList(i).name;
+   Eval10dB.data = FileReader(strcat('2014\Eval\Clean\',Eval10dBList(i).name)); 
+end
+
+Eval0dBList = dir('2014\Eval\0dB\*.08');
+for i=1:numel(Eval0dBList)
+  Eval0dB.name = Eval0dBList(i).name;
+  Eval0dB.data = FileReader(strcat('2014\Eval\Clean\',Eval0dBList(i).name)); 
+end
+
