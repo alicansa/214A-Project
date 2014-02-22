@@ -31,8 +31,6 @@ for i=1:length(EvalClean)
     end
     
     %process the framed data
-    %check periodicity with autocorrelation
-    %check energy of certain frequency bands
     
 end
 
@@ -53,7 +51,7 @@ for i=1:length(Eval10dB)
     
     %process the framed data
     %check periodicity with autocorrelation
-    %check energy of certain frequency bands
+    %check energy 
     
 end
 
@@ -73,8 +71,6 @@ for i=1:length(Eval0dB)
     
     
     %process the framed data
-    %check periodicity with autocorrelation
-    %check energy of certain frequency bands
     
 end
 
