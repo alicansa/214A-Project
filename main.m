@@ -46,11 +46,10 @@ for i=1:length(Train10dB)
     pro_data = PreEmphasis(data,0.97);
     %% Get statistics
     [En En_log autocorr lags S F T] = GetStatistics(pro_data,frameSize,stepSize,speechLength,speechFs);
-    
 %     figure
 %     imagesc(T,F,log10(abs(S)))
     %% Process statistics
-    decisions = ProcessStatistics(En,autocorr,lags,S,F,T,frameSize,stepSize,speechLength,0.1);
+    decisions = ProcessStatistics(En,autocorr,lags,S,F,T,frameSize,stepSize,speechLength,0.1,speechFs);
     %% Evaluation 
    % [Pfa(i), Pmiss(i), aveError(i)] = evalSAD(decisions,speechFileName,frameSize);
 end

@@ -1,4 +1,0 @@
-function [output] = PreEmphasis(data,coeff)
-filter(
-end
-
