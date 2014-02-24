@@ -14,32 +14,30 @@ threshF = 185;
 threshSF = 5;
 hammWin = HammingWindow(frameSize);
 rectWin = RectWindow(frameSize);
-%loop through all train files
-%clean/no noise
+% loop through all train files
+
+%% clean/no noise
 for i=1:length(TrainClean)
     data = TrainClean(i).data';
     speechFileName = TrainClean(i).name;
     speechLength=length(data);
     speechFs = TrainClean(i).Fs;
-    
     %% Pre-processing
     pro_data = PreEmphasis(data,0.97);
     %% Get statistics
-    [En autocorr lags] = GetStatistics(pro_data,frameSize,stepSize,speechLength);
-    plot(En);
-    figure
-    plot(lags(125,:),autocorr(125,:));
-    figure
-    plot(lags(100,:),autocorr(100,:));
+    [En En_log autocorr lags S F T] = GetStatistics(pro_data,frameSize,stepSize,speechLength,speechFs);
+%     figure
+%     imagesc(T,F,log10(abs(S)))
     %% Process statistics
-    
+    decisions = ProcessStatistics(En,autocorr,lags,S,F,T,frameSize,stepSize,speechLength,0.1,speechFs);
+    %% Evaluation
+    %[Pfa(i), Pmiss(i), aveError(i)] = evalSAD(decisions,speechFileName,frameSize);
 end
 
-%10dB SNR
+
+%% 10dB SNR
 for i=1:length(Train10dB)
     data = Train10dB(i).data';
-    plot(data);
-    figure
     speechFileName = Train10dB(i).name;
     speechLength=length(data);
     speechFs = Train10dB(i).Fs;
@@ -47,9 +45,14 @@ for i=1:length(Train10dB)
     %% Pre-processing
     pro_data = PreEmphasis(data,0.97);
     %% Get statistics
-    [En autocorr lags] = GetStatistics(pro_data,frameSize,stepSize,speechLength);
-    %% Process statistics
+    [En En_log autocorr lags S F T] = GetStatistics(pro_data,frameSize,stepSize,speechLength,speechFs);
     
+%     figure
+%     imagesc(T,F,log10(abs(S)))
+    %% Process statistics
+    decisions = ProcessStatistics(En,autocorr,lags,S,F,T,frameSize,stepSize,speechLength,0.1);
+    %% Evaluation 
+   % [Pfa(i), Pmiss(i), aveError(i)] = evalSAD(decisions,speechFileName,frameSize);
 end
 
 %0dB SNR
@@ -62,9 +65,11 @@ for i=1:length(Train0dB)
     %% Pre-processing
     pro_data = PreEmphasis(data,0.97);
     %% Get statistics
-    [En autocorr lags] = GetStatistics(pro_data,frameSize,stepSize,speechLength);
+    [En En_log autocorr lags S F T] = GetStatistics(pro_data,frameSize,stepSize,speechLength,speechFs);
+    imagesc(T,F,log10(abs(S)))
     %% Process statistics
-    
+    decisions = ProcessStatistics(En,autocorr,lags,S,F,T,frameSize,stepSize,speechLength);
+    [Pfa(i), Pmiss(i), aveError(i)] = evalSAD(decisions,speechFileName,frameSize);
     
 end
 

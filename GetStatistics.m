@@ -1,20 +1,24 @@
-function [En autocorr lags] = GetStatistics(data,frameSize,stepSize,speechLength)
+function [En En_log autocorr lags S F T] = GetStatistics(data,frameSize,stepSize,speechLength,Fs)
 hammWin = HammingWindow(frameSize);
 rectWin = RectWindow(frameSize);
 
 %% short time energy 
 %Use hamming window
-En = ShortTimeEnergy(data,hammWin,stepSize);
+[En En_log] = ShortTimeEnergy(data,hammWin,stepSize);
     
-%% check periodicity with autocorrelation
+%% short time autocorrelation
 %Use rectangular window
 k=1;
 for j=1:stepSize:speechLength
    [autocorr(k,:),lags(k,:)] = ShortTimeAutoCorr(data,rectWin,j);
    k=k+1;
 end
-    
-    %% check energy of certain frequency bands
+
+
+%% short time fourier transform 
+%Use hamming window
+[S F T] = STFT(data,hammWin,frameSize,stepSize,Fs);
+
 
 end
 
