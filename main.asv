@@ -35,14 +35,9 @@ for i=1:length(EvalClean)
     decisions = ProcessStatistics(En,autocorr,lags,S,F,T,frameSize,stepSize,speechLength,0.9,speechFs);
     %% Evaluation
     [Pfa(i), Pmiss(i), aveError(i) grnd_truth] = evalSAD(decisions,strcat('2014/Eval/Labels/',speechFileName(1:length(speechFileName)-2),'txt'),1000*frameSize/speechFs);
-    figure;
-    plot(En);
-    hold on;
-    stem(decisions,'r');
-    stem(grnd_truth,'g');
 end
 figure
-plot(aveError);
+plot(Pfa);
 
 %% 10dB SNR
 for i=1:length(Eval10dB)

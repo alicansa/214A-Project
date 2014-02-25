@@ -1,4 +1,4 @@
-function [Pfa, Pmiss, aveError] = evalSAD(input,ref,winLen)
+function [Pfa, Pmiss, aveError grnd_truth] = evalSAD(input,ref,winLen)
 %======================================================================
 % SAD Performance detection
 %

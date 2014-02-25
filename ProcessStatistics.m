@@ -15,18 +15,15 @@ for i=1:N(1)
     pitch(i) = mean([(max(locs(3),locs(2)) - locs(1)),(max(locs(5),locs(4))-max(locs(3),locs(2)))]);
     pitch_div = (max(locs(3),locs(2)) - locs(1))/(max(locs(5),locs(4))-max(locs(3),locs(2)));
     a = mean(abs(autocorr(i,:)));
-    if (pitch_div >0.95 && pitch_div<1.05)
+    if (pitch_div >0.90 && pitch_div<1.10 && peaks(1)>0.1)
         vowel_frame_indices(k) = i;
         decisions(i) = 1;
         k=k+1;
     end
 end
-figure
-plot(En)
-hold on
-stem(decisions,'r');
-figure
-plot(decisions.*pitch,'ko');
+%stem(decisions,'r');
+%figure
+%plot(decisions.*pitch,'ko');
 
 %% Process short time energy
 

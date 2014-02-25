@@ -40,13 +40,10 @@ if strcmp(decision(i),'sp') || strcmp(decision(i),'sil')	%Non-Speech Frames
 
 end
   
-
 ind_count = ind_len+ind_count;
-
 
 end
  
-
 outSAD = outSAD';
 
 fclose(fid);
