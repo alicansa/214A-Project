@@ -23,10 +23,10 @@ for i=1:numel(Train0dBList)
    Train0dB(i).Fs = 8000;
 end
 
-EvalCleanList = dir('2014/Eval/Clean/*.08');
+EvalCleanList = dir('2014\Eval\Clean\*.08');
 for i=1:numel(EvalCleanList)
   EvalClean(i).name = EvalCleanList(i).name;
-   EvalClean(i).data = wavread(strcat('2014/Eval/Clean/',EvalCleanList(i).name));
+   EvalClean(i).data = wavread(strcat('2014\Eval\Clean\',EvalCleanList(i).name));
    EvalClean(i).Fs = 8000;
 end
 

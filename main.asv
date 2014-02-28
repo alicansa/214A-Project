@@ -34,7 +34,7 @@ for i=1:length(EvalClean)
     %% Process statistics
     decisions = ProcessStatistics(En,autocorr,lags,S,F,T,frameSize,stepSize,speechLength,0.9,speechFs);
     figure
-    plot(lags(110,:),autocorr(110,:));
+    plot(autocorr
     %% Evaluation
     [Pfa(i), Pmiss(i), aveError(i) grnd_truth] = evalSAD(decisions,strcat('2014/Eval/Labels/',speechFileName(1:length(speechFileName)-2),'txt'),1000*frameSize/speechFs);
     figure;
