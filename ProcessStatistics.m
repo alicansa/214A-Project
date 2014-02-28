@@ -21,7 +21,7 @@ for i=1:N(1)
         k=k+1;
     end
 end
-%stem(decisions,'r');
+%stem(decisions,'r');cfgdfgfgfdgfdgdf
 %figure
 %plot(decisions.*pitch,'ko');
 
